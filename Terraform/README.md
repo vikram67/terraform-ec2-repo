@@ -19,6 +19,7 @@ cd Terraform/environments/dev
 terraform init
 terraform plan
 terraform apply
+oka
 ```
 
 ## Required GitHub secrets
