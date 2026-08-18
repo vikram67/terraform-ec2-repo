@@ -43,6 +43,18 @@ jobs:
       - name: Terraform Format
         run: terraform fmt -check -recursive
 
+      - name: Verify AWS Credentials
+        run: |
+          if [ -z "$AWS_ACCESS_KEY_ID" ]; then
+            echo "ERROR: AWS_ACCESS_KEY_ID secret not configured in GitHub"
+            exit 1
+          fi
+          if [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
+            echo "ERROR: AWS_SECRET_ACCESS_KEY secret not configured in GitHub"
+            exit 1
+          fi
+          echo "✓ AWS credentials found"
+
       - name: Terraform Init
         run: terraform -chdir=environments/dev init -backend=false
 
