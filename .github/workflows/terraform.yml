@@ -17,15 +17,15 @@ jobs:
   terraform:
     name: Terraform plan/apply
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     defaults:
       run:
         shell: bash
         working-directory: Terraform
 
     env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
       TF_VAR_aws_region: ${{ secrets.AWS_REGION }}
       TF_VAR_ami_id: ${{ secrets.AMI_ID }}
       TF_VAR_subnet_id: ${{ secrets.SUBNET_ID }}
@@ -35,6 +35,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::YOUR_ACCOUNT_ID:role/github-terraform-role
+          aws-region: ${{ secrets.AWS_REGION }}
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
@@ -42,18 +48,6 @@ jobs:
 
       - name: Terraform Format
         run: terraform fmt -check -recursive
-
-      - name: Verify AWS Credentials
-        run: |
-          if [ -z "$AWS_ACCESS_KEY_ID" ]; then
-            echo "ERROR: AWS_ACCESS_KEY_ID secret not configured in GitHub"
-            exit 1
-          fi
-          if [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
-            echo "ERROR: AWS_SECRET_ACCESS_KEY secret not configured in GitHub"
-            exit 1
-          fi
-          echo "✓ AWS credentials found"
 
       - name: Terraform Init
         run: terraform -chdir=environments/dev init -backend=false
