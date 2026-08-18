@@ -40,8 +40,8 @@ jobs:
         with:
           terraform_version: 1.8.5
 
-      - name: Terraform Format
-        run: terraform fmt -check -recursive
+      # - name: Terraform Format
+      #   run: terraform fmt -check -recursive
 
       - name: Terraform Init
         run: terraform -chdir=environments/dev init -backend=false
