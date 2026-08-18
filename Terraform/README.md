@@ -1,6 +1,6 @@
 # Terraform EC2 Module Example
 
-This repository contains a sample Terraform module structure for creating an EC2 instance and a GitHub Actions CI/CD pipeline.
+This repository contains a sample Terraform module structure for creating an EC2 instance and a GitHub Actions CI/CD pipeline. And this doc is good
 
 ## Structure
 
