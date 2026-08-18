@@ -43,10 +43,9 @@ resource "aws_security_group" "web" {
 module "ec2" {
   source = "../../modules/ec2"
 
-  name       = "dev-web-instance"
-  environment = "dev"
-  ami_id     = var.ami_id
-
+  name                    = "dev-web-instance"
+  environment             = "dev"
+  ami_id                  = var.ami_id
   instance_type           = "t3.micro"
   subnet_id               = var.subnet_id
   security_group_ids      = [aws_security_group.web.id]
