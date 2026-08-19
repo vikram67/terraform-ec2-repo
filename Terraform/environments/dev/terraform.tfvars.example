@@ -1,4 +1,4 @@
 aws_region = "us-east-1"
-ami_id     = "ami-000df182bacb1f051"
+ami_id     = "ami-0cded71ff6ab7f608"
 subnet_id  = "subnet-01644937675f20989"
 key_name   = "test_key"
