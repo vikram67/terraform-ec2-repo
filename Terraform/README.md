@@ -35,4 +35,4 @@ Create an IAM user with only the permissions required to run this Terraform depl
 - `SUBNET_ID`
 - `KEY_NAME`
 
-These are used by the GitHub Actions pipeline to run Terraform plan and apply. Correct it ami 
+These are used by the GitHub Actions pipeline to run Terraform plan and apply. Correct it ami.
