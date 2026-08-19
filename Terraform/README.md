@@ -22,28 +22,14 @@ terraform apply
 oka
 ```
 
-## GitHub Actions OIDC setup
+## GitHub Actions AWS credentials
 
-Create an IAM OIDC identity provider for `https://token.actions.githubusercontent.com` with audience `sts.amazonaws.com`.
-Configure `github-terraform-role` to trust that provider. Its role trust policy must allow `sts:AssumeRoleWithWebIdentity` and include conditions matching this repository:
-
-```json
-"StringEquals": {
-	"token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
-},
-"StringLike": {
-	"token.actions.githubusercontent.com:sub": [
-		"repo:YOUR_ORG/YOUR_REPO:ref:refs/heads/main",
-		"repo:YOUR_ORG/YOUR_REPO:pull_request"
-	]
-}
-```
-
-Replace `YOUR_ORG/YOUR_REPO` with the actual GitHub owner and repository. Add the role ARN as the repository secret `AWS_ROLE_TO_ASSUME`.
+Create an IAM user with only the permissions required to run this Terraform deployment. Store its access key credentials as GitHub repository secrets.
 
 ## Required GitHub secrets
 
-- `AWS_ROLE_TO_ASSUME`
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
 - `AWS_REGION`
 - `AMI_ID`
 - `SUBNET_ID`
