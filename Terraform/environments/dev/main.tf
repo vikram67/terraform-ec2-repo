@@ -1,5 +1,5 @@
 resource "aws_security_group" "web" {
-  name        = "dev-web-sg-3"
+  name        = "dev-web-sg-4"
   description = "Security group for the dev EC2 instance"
 
   ingress {
@@ -46,7 +46,7 @@ module "ec2" {
   name                    = "dev-web-instance"
   environment             = "dev"
   ami_id                  = var.ami_id
-  instance_type           = "t3.micro"
+  instance_type           = "t4g.micro"
   subnet_id               = var.subnet_id
   security_group_ids      = [aws_security_group.web.id]
   key_name                = var.key_name
