@@ -49,4 +49,4 @@ Replace `YOUR_ORG/YOUR_REPO` with the actual GitHub owner and repository. Add th
 - `SUBNET_ID`
 - `KEY_NAME`
 
-These are used by the GitHub Actions pipeline to run Terraform plan and apply. Correct
+These are used by the GitHub Actions pipeline to run Terraform plan and apply. Correct it
