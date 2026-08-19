@@ -53,7 +53,6 @@ jobs:
         run: terraform -chdir=environments/dev validate
 
       - name: Terraform Plan
-        if: github.event_name == 'pull_request'
         run: terraform -chdir=environments/dev plan -no-color -input=false
 
       - name: Terraform Apply
