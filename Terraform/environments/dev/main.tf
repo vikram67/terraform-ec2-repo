@@ -1,5 +1,5 @@
 resource "aws_security_group" "web" {
-  name        = "dev-web-sg-4"
+  name        = "dev-web-sg-5"
   description = "Security group for the dev EC2 instance"
 
   ingress {
